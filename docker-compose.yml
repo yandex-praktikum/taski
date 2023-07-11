@@ -31,3 +31,4 @@ services:
   frontend:
     env_file: .env
     build: ./frontend/
+    
