@@ -1,0 +1,33 @@
+# Файл docker-compose.yml
+version: '3'
+
+volumes:
+  pg_data:
+  static:
+
+services:
+  db:
+    image: postgres:13.10
+    env_file: .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  backend:
+    build: ./backend/
+    env_file: .env
+    volumes:
+      - static:/backend_static
+  frontend:
+    env_file: .env
+    build: ./frontend/
+# Добавляем новый контейнер: gateway.
+  gateway:
+    # Сбилдить и запустить образ,
+    # описанный в Dockerfile в папке gateway
+    build: ./gateway/
+    # Ключ ports устанавливает
+    # перенаправление всех запросов с порта 8000 хоста
+    # на порт 80 контейнера.
+    volumes:
+      - static:/staticfiles/
+    ports:
+      - 8000:80
