@@ -28,9 +28,9 @@ const TaskEditModal = ({ taskData, toggle, onSave }) => {
 
   return (
     <Modal isOpen={true} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Task Item</ModalHeader>
-      <ModalBody>
-        <Form>
+      <Form onSubmit={(e) => { onSave(item); e.preventDefault(); }}>
+        <ModalHeader toggle={toggle}>Task Item</ModalHeader>
+        <ModalBody>
           <FormGroup>
             <Label for="task-title">Title</Label>
             <Input
@@ -40,6 +40,7 @@ const TaskEditModal = ({ taskData, toggle, onSave }) => {
               value={item.title}
               onChange={handleChange}
               placeholder="Enter Task Title"
+              required
             />
           </FormGroup>
           <FormGroup>
@@ -51,6 +52,7 @@ const TaskEditModal = ({ taskData, toggle, onSave }) => {
               value={item.description}
               onChange={handleChange}
               placeholder="Enter Task description"
+              required
             />
           </FormGroup>
           <FormGroup check>
@@ -64,13 +66,13 @@ const TaskEditModal = ({ taskData, toggle, onSave }) => {
               Completed
             </Label>
           </FormGroup>
-        </Form>
-      </ModalBody>
-      <ModalFooter>
-        <Button color="success" onClick={() => onSave(item)}>
-          Save
-        </Button>
-      </ModalFooter>
+        </ModalBody>
+        <ModalFooter>
+          <Button type="submit" color="success">
+            Save
+          </Button>
+        </ModalFooter>
+      </Form>
     </Modal>
   );
 };
