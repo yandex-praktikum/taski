@@ -119,3 +119,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+ALLOWED_HOSTS = ['158.160.95.30', '127.0.0.1', 'localhost']
+
